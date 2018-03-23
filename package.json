@@ -36,5 +36,8 @@
     "url": "git://github.com/megha.makvana/sails-dibs.git"
   },
   "author": "megha.makvana",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "prettier": "1.11.1"
+  }
 }

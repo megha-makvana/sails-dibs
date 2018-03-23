@@ -16,7 +16,6 @@ module.exports = {
     service_name:{
       type:"string",
       required: true,
-      unique:true
     },
     service_duration:{
       type: "int",

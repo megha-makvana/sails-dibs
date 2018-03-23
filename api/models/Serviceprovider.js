@@ -8,18 +8,19 @@
 module.exports = {
 
   attributes: {
-    // serv_pro_id:{
-    //   type:'int',
-    //   primaryKey:true,
-    //   autoIncrement:true
-    // },
+    serv_pro_id:{
+      type:'int',
+      primaryKey:true,
+      autoIncrement:true
+    },
       service: {
         model: 'Service',
-        foreignKey: true
+        unique:true
+     //   foreignKey: true
       },
       provider: {
         model: 'User',
-        foreignKey: true
+     //   foreignKey: true
       }
   }
 };

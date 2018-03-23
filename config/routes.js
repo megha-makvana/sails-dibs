@@ -21,53 +21,48 @@
  */
 
 module.exports.routes = {
-
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
+  "/": {
+    view: "homepage"
   },
   //done
-  '/user/createUser':'UserController.createUser',  
-  '/user/setupBusiness/:id':'UserController.setupBusiness',   //setting up business //d
-  '/role/addRole': 'RoleController.addRoles', //addRole to login user
-  '/user/getAppointments/:id': 'UserController.fetchUserAppointments', //user's appointment
-  '/user/getRole/:id': 'UserController.getRole',
-  '/user/getServices/:business_name': 'UserController.getServices', //fetch services of a business
+  "/user/createUser": "UserController.createUser",
+  "/user/setupBusiness/:id": "UserController.setupBusiness", //setting up business //d
+  "/role/addRole": "RoleController.addRoles", //addRole to login user
+  "/user/fetchUsers/:id": "UserController.fetchUsers", //add role of provider/customer to user
+  "/user/listOfBusiness/:value": "UserController.listOfBusiness", //list of all clinics or salon
 
+  "/user/getRole/:id": "UserController.getRole",
+  "/user/getAppointments/:id": "UserController.fetchUserAppointments", //user's appointment
 
-  
-  '/user/getLoc/:id':'UserController.getLoc',  //fetch address of user
-  '/user/listOfBusiness/:category':'UserController.listOfBusiness',  //list of all clinics or salon
-  '/appointment/getAppointments/:id':'AppointmentController.getAppointments', //fetch appointment details of a user 
-  '/user/getServices/:business_name':'UserController.getServices', //fetch services of a business
+  "/user/getLoc/:id": "UserController.getLoc", //fetch address of user
+
+  "/appointment/getAppointments/:id": "AppointmentController.getAppointments", //fetch appointment details of a user
+  // "/user/getServices/:business_name": "UserController.getServices", //fetch services of a business
   //'/user/getServicesByCategory/:business_category':'UserController.getServicesByCategory',  //fetch services of a business_category, eg. clinic's services
- // '/role/user/getUsers/:role_id':'RoleController.getUsers', //list of providers or customers
+  // '/role/user/getUsers/:role_id':'RoleController.getUsers', //list of providers or customers
   //'/user/getAppointments/':'UserController.fetchUserAppoinments', //user's appointments
-  '/user/edit/:id':'UserController.edit',  //user edit view
-  '/appointment/setAppointment/': 'AppointmentController.setAppointment',  //booking an apointment
-  '/service/addService':'ServiceController.addService', // add an existing service to the user
-  '/user/update/:id':'UserController.update',  //update user's information
-  '/user/fetchUsers/:id':'UserController.fetchUsers',
- //add role of provider/customer to user
-  //Book Appointment: 
-    '/user/BookApp/getBusinessCategories':'UserController.getBusinessCategories',
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+  // "/user/edit/:id": "UserController.edit", //user edit view
+  "/appointment/setAppointment/": "AppointmentController.setAppointment", //booking an apointment
+  "/user/update/:id": "UserController.update" //update user's information
 
+  //Book Appointment:
+  /***************************************************************************
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *c
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 };

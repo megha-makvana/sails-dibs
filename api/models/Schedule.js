@@ -22,11 +22,11 @@ module.exports = {
       defaultsTo: true
     },
     start_hour:{
-      type:'int',
+      type:'datetime',
       required:true,
     },
     end_hour:{
-      type:'int',
+      type:'datetime',
       required:true,
     },
     owner:{

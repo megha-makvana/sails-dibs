@@ -18,36 +18,44 @@ module.exports = {
             
         },
         setAppointment: function(req,res) {
-            Appointment.create(req.params.all(), function apptCreated(err, appt){
-                if(err) {return res.json(err)}
-                // User.findOne({id: user_id})
-                //     .exec(function addProvider(err, user){
-                //         sails.log(user);
-                //         appt.provider.add(user);
-                //         appt.save(function(err,result){
-                //             if(err) {return res.json(err)}
-                //             sails.console.log(result);
-                            
-                //         })
-                //     })
-                // Service.findOne({id: service_id})
-                //         .exec(function addService(err, service){
-                //             appt.serviceAppointment.add(service);
-                //             appt.save(function(err,result){
-                //                 if(err) {return res.json(err)}
-                //                 sails.log(result);
-                //             })
-                //         })
-                res.json(appt);
-            })
+            sails.log('Body',req.body);
+            
+            Appointment.create({ appointmentDate,appointmentTime,time_slot,status})
+                        .exec( function(err,appt){
+                            if(err) { sails.log(err) }
+                            Service.findOne({ service_id})
+                                    .exec(function(err,service){
+                                        service.serviceAppointments.add(appt);
+                                        service.save(function(err,result){
+                                            if(err) { sails.log(err)}
+                                        })
+                                    })
+                            //Appointment adding to Provider
+                            User.findOne({userId})
+                                .populate('roles')
+                                .exec(function(err,pro){
+                                    let role = pro.roles;
+                                        if(role==1){
+                                            pro.userAppointments.add(appt)
+                                            pro.save(function(err, result){
+                                                if(err) { sails.log(err)}
+                                            })
+                                    }
+                                }) 
+                            //Appointment adding to Customer
+                            User.findOne({})  
+                                .populate('roles')
+                                .exec(function(err,customer){
+                                    let role= customer.roles;
+                                    if(role==2){
+                                        customer.userAppointments.add(appt)
+                                        customer.save(function(err, result){
+                                            if(err) { sails.log(err)}
+                                        })
+                                    }
+                                })
+                        })
+
         },
-        apptavailable: function(req,res,next) {
-            Appt.findOne(req.param('id')).exec(function checkApp(err,appt){
-                if(err) {
-                    sails.log(err);
-                }
-                
-            })
-        }
 };
 

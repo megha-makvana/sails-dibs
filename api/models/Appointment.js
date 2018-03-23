@@ -14,15 +14,15 @@ module.exports = {
       autoIncrement:true
     },
     appointmentDate: {
-      type: 'date',
+      type: 'datetime',
       required: true,
     },
     appointmentTime: {
-      type: 'string',
+      type: 'datetime',
       required: true,
     },
     time_slot: {
-      type: 'int',
+      type: 'datetime',
       required: true
     },
     status: {
