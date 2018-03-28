@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-        getAppointments: function(req, res) {
+        getAppointment: function(req, res) {
             var id=req.params.id;
             Appointment.findOne({appointment_id: id})
                 .populate('provider')
@@ -17,45 +17,67 @@ module.exports = {
                 })
             
         },
-        setAppointment: function(req,res) {
-            sails.log('Body',req.body);
-            
-            Appointment.create({ appointmentDate,appointmentTime,time_slot,status})
-                        .exec( function(err,appt){
-                            if(err) { sails.log(err) }
-                            Service.findOne({ service_id})
+        create: function(req,res,next) {
+            sails.log('req.body',req.body)
+            status="booked"
+            Appointment.findOrCreate({appointmentDate:req.body.values.appointmentDate, start_time:req.body.values.start_time, end_time:req.body.end_time, status: status},{appointmentDate:req.body.values.appointmentDate, start_time:req.body.values.start_time, end_time:req.body.end_time, status: status})
+                        .exec(function apptCreated(err,appt){
+                            if(err) { sails.log('err',err)}
+                            Service.findOne({ service_id : req.body.values.selected_service})
                                     .exec(function(err,service){
                                         service.serviceAppointments.add(appt);
                                         service.save(function(err,result){
                                             if(err) { sails.log(err)}
                                         })
-                                    })
-                            //Appointment adding to Provider
-                            User.findOne({userId})
+                                    }) 
+                            User.find({userId: req.body.businessId})  
                                 .populate('roles')
-                                .exec(function(err,pro){
-                                    let role = pro.roles;
-                                        if(role==1){
-                                            pro.userAppointments.add(appt)
-                                            pro.save(function(err, result){
-                                                if(err) { sails.log(err)}
-                                            })
-                                    }
-                                }) 
+                                .exec(function(err,provider){
+                                    _.map( provider.roles, role => {
+                                      if(role.role_id==1){
+                                        provider.providerAppointments.add(appt);
+                                        provider.save(function(err, result){
+                                            if(err) { sails.log(err)}
+                                            sails.log('appointment added to provider')
+                                        })
+                                    }  
+                                })
+                            })                  
                             //Appointment adding to Customer
-                            User.findOne({})  
+                            User.find({userId: req.body.customerId})  
                                 .populate('roles')
                                 .exec(function(err,customer){
-                                    let role= customer.roles;
-                                    if(role==2){
-                                        customer.userAppointments.add(appt)
+                                    _.map( customer.roles, role => {
+                                      if(role.role_id==2){
+                                        customer.customerAppointments.add(appt)
                                         customer.save(function(err, result){
                                             if(err) { sails.log(err)}
+                                            sails.log('appointment added to customer')
                                         })
-                                    }
+                                    }  
                                 })
+                            })
+                            // Adding contact to customer 
+                            User.update({userId: req.body.customerId},{ contact_no: req.body.values.contact_no})
+                                .exec(function userUpdated(err, user){
+                                    if(err) { return sails.log(err)}
+                                    sails.log('contact number updated',user);
+                            })
                         })
-
         },
+        getAllAppointments: function(req, res, next ){
+            Appointment.query('SELECT * FROM appointment',[],function(err, rawResult) {
+                if (err) { return res.serverError(err); }
+                res.json(rawResult)
+                // sails.log(rawResult);
+                // ...grab appropriate data...
+                // (result format depends on the SQL query that was passed in, and the adapter you're using)
+
+                // Then parse the raw result and do whatever you like with it.
+                    
+             //   return res.ok();
+
+            });
+        }
 };
 

@@ -17,25 +17,25 @@ module.exports = {
       type: 'datetime',
       required: true,
     },
-    appointmentTime: {
-      type: 'datetime',
+    start_time: {
+      type: 'string',
       required: true,
     },
-    time_slot: {
-      type: 'datetime',
-      required: true
+    end_time: {
+      type: 'string',
     },
     status: {
       type: 'string',
       enum: ['booked', 'canceled']
     },
-    provider: {
+    appProvider: {
       model: 'user',
-      required: true,
+    },
+    appCustomer:{
+      model: 'user',
     },
     serviceAppointment: {
       model: 'service',
-      required: true,
     }
   }
 };

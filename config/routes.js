@@ -41,18 +41,20 @@ module.exports.routes = {
   "/user/fetchUsers/:id": "UserController.fetchUsers", //add role of provider/customer to user
   "/user/listOfBusiness/:value": "UserController.listOfBusiness", //list of all clinics or salon
 
+  "/appt/create": "AppointmentController.create",
+  "---": "AppointmentController.getAllAppointments",
+
   "/user/getRole/:id": "UserController.getRole",
-  "/user/getAppointments/:id": "UserController.fetchUserAppointments", //user's appointment
+  "/user/getAppointment/:id": "UserController.fetchUserAppointments", //user's appointment
 
   "/user/getLoc/:id": "UserController.getLoc", //fetch address of user
 
-  "/appointment/getAppointments/:id": "AppointmentController.getAppointments", //fetch appointment details of a user
+  "/appointment/getAppointments/:id": "AppointmentController.getAppointment", //fetch appointment details of a user
   // "/user/getServices/:business_name": "UserController.getServices", //fetch services of a business
   //'/user/getServicesByCategory/:business_category':'UserController.getServicesByCategory',  //fetch services of a business_category, eg. clinic's services
   // '/role/user/getUsers/:role_id':'RoleController.getUsers', //list of providers or customers
   //'/user/getAppointments/':'UserController.fetchUserAppoinments', //user's appointments
   // "/user/edit/:id": "UserController.edit", //user edit view
-  "/appointment/setAppointment/": "AppointmentController.setAppointment", //booking an apointment
   "/user/update/:id": "UserController.update" //update user's information
 
   //Book Appointment:

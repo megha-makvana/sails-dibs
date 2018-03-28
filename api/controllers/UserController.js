@@ -96,17 +96,18 @@ module.exports = {
             }
         }
         User.find({ business_category: business_categoryy })
-            .populate("roles")
-            .populate("services")
-            .populate("userAppointments")
-            .populate("schedules")
-            .exec(function displayList(err, user) {
-                if (err) {
-                return res.json(err);
-                }
+          .populate("roles")
+          .populate("services")
+          .populate("providerAppointments")
+          .populate("customerAppointments")
+          .populate("schedules")
+          .exec(function displayList(err, user) {
+            if (err) {
+              return res.json(err);
+            }
 
-                res.json(user);
-            });
+            res.json(user);
+          });
     },
     // getAppointments: function(req, res) {
     //     var id= req.params.id                                            ;
@@ -134,32 +135,34 @@ module.exports = {
     //     });
     // },
     fetchUsers: function(req, res, next) {
-        User.find(req.param('id'))
-        .populate('roles')
-        .populate('services')
-        .populate('userAppointments')
-        .populate('schedules')
-        .exec(function userFound(err,user){
-            if(err) {
-                return sails.log(err);
+        User.find(req.param("id"))
+          .populate("roles")
+          .populate("services")
+          .populate("providerAppointments")
+          .populate("customerAppointments")
+          .populate("schedules")
+          .exec(function userFound(err, user) {
+            if (err) {
+              return sails.log(err);
             }
             res.json(user);
-        })
+          });
     },
     fetchUserAppointments: function (req, res, next) {
         sails.log('params:',req.params)
-        User.findOne(req.param('id'))
-            .populate('roles')
-            .populate('services')
-            .populate('userAppointments')
-            .populate('schedules')
-            .exec(function userFound(err, user) {
-                if (err) {
-                    return sails.log(err);
-                }
-                console.log(user);
-                //res.json(user.userAppointments);
-            })
+        User.findOne(req.param("id"))
+          .populate("roles")
+          .populate("services")
+          .populate("providerAppointments")
+          .populate("customerAppointments")
+          .populate("schedules")
+          .exec(function userFound(err, user) {
+            if (err) {
+              return sails.log(err);
+            }
+            console.log(user);
+            //res.json(user.userAppointments);
+          });
     },
     // getRole: function(req,res,next) {
     //     User.findOne(req.param('id'))

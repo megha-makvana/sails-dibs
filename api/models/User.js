@@ -60,10 +60,14 @@ module.exports = {
       collection:'Schedule',
       via:'owner',
     },
-    userAppointments:{                                       // One to Many = User(customer) - multiple Appointments
+    providerAppointments:{                                       // One to Many = User(customer) - multiple Appointments
       collection:'Appointment',
-      via:'provider',
+      via:'appProvider',
     },
+    customerAppointments:{                                      
+      collection:'Appointment',                                    // One to Many = User(provider) - multiple Appointments
+      via:'appCustomer'
+    }
 
   //   toJSON: function () {
   //     var obj = this.toObject();
