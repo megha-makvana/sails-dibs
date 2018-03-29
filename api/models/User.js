@@ -60,42 +60,10 @@ module.exports = {
       collection:'Schedule',
       via:'owner',
     },
-    providerAppointments:{                                       // One to Many = User(customer) - multiple Appointments
+    customerAppointments:{                                       // One to Many = User(customer) - multiple Appointments
       collection:'Appointment',
-      via:'appProvider',
+      via:'customer',
     },
-    customerAppointments:{                                      
-      collection:'Appointment',                                    // One to Many = User(provider) - multiple Appointments
-      via:'appCustomer'
-    }
-
-  //   toJSON: function () {
-  //     var obj = this.toObject();
-  //     delete obj.password;
-  //     return obj;
-  //   }
-  // },
-
-  // beforeCreate: function(values, cb){
-  //   bcrypt.hash(values.password, 10, function (err, hash) {
-  //     if (err) return cb(err);
-  //     values.password = hash;
-  //     cb();
-  //   });
-  // },
-
-  // comparePassword: function (password, user) {
-  //   return new Promise(function (resolve, reject) {
-  //     bcrypt.compare(password, user.password, function (err, match) {
-  //       if (err) reject(err);
-
-  //       if (match) {
-  //         resolve(true);
-  //       } else {
-  //         reject(err);
-  //       }
-  //     })
-  //   });
   }
 
 };

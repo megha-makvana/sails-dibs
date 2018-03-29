@@ -42,20 +42,17 @@ module.exports.routes = {
   "/user/listOfBusiness/:value": "UserController.listOfBusiness", //list of all clinics or salon
 
   "/appt/create": "AppointmentController.create",
-  "---": "AppointmentController.getAllAppointments",
+  "/appt/getAllAppointments": "AppointmentController.getAllAppointments",
 
-  "/user/getRole/:id": "UserController.getRole",
-  "/user/getAppointment/:id": "UserController.fetchUserAppointments", //user's appointment
 
-  "/user/getLoc/:id": "UserController.getLoc", //fetch address of user
+ // "/user/getAppointment/:id": "UserController.fetchUserAppointments", //user's appointment
 
-  "/appointment/getAppointments/:id": "AppointmentController.getAppointment", //fetch appointment details of a user
   // "/user/getServices/:business_name": "UserController.getServices", //fetch services of a business
   //'/user/getServicesByCategory/:business_category':'UserController.getServicesByCategory',  //fetch services of a business_category, eg. clinic's services
   // '/role/user/getUsers/:role_id':'RoleController.getUsers', //list of providers or customers
   //'/user/getAppointments/':'UserController.fetchUserAppoinments', //user's appointments
   // "/user/edit/:id": "UserController.edit", //user edit view
-  "/user/update/:id": "UserController.update" //update user's information
+  //"/user/update/:id": "UserController.update" //update user's information
 
   //Book Appointment:
   /***************************************************************************

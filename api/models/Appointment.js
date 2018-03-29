@@ -6,36 +6,32 @@
  */
 
 module.exports = {
-
   attributes: {
-    appointment_id:{
-      type:'int',
+    appointment_id: {
+      type: "int",
       primaryKey: true,
-      autoIncrement:true
+      autoIncrement: true
     },
     appointmentDate: {
-      type: 'datetime',
-      required: true,
+      type: "datetime",
+      required: true
     },
     start_time: {
-      type: 'string',
-      required: true,
+      type: "string",
+      required: true
     },
     end_time: {
-      type: 'string',
+      type: "string"
     },
     status: {
-      type: 'string',
-      enum: ['booked', 'canceled']
+      type: "string",
+      enum: ["booked", "cancelled"]
     },
-    appProvider: {
-      model: 'user',
-    },
-    appCustomer:{
-      model: 'user',
+    customer: {    // One to Many Relationship between customer and appointments
+      model: "user",
     },
     serviceAppointment: {
-      model: 'service',
+      model: "service"
     }
   }
 };

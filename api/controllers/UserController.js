@@ -80,7 +80,7 @@ module.exports = {
     listOfBusiness: function(req, res){
         let business_categoryy;
         const index = req.params.value;
-        console.log(index);
+        console.log('Business Category Selected',index);
         switch(index){
             case '1':{
                 business_categoryy='Clinic'
@@ -98,7 +98,6 @@ module.exports = {
         User.find({ business_category: business_categoryy })
           .populate("roles")
           .populate("services")
-          .populate("providerAppointments")
           .populate("customerAppointments")
           .populate("schedules")
           .exec(function displayList(err, user) {
@@ -109,15 +108,6 @@ module.exports = {
             res.json(user);
           });
     },
-    // getAppointments: function(req, res) {
-    //     var id= req.params.id                                            ;
-    //     User.findOne({id:id})
-    //         .populate('userAppointments')
-    //         .exec(function gotThat(err, user){
-    //             if(err) { return res.json(err);}
-    //             res.json(user.userAppointments);
-    //         })
-    // },
     // edit: function (req, res, next) {
     //     User.findOne(req.param('id'), function editUser(err, user) {
     //         if (err) return next(err);
@@ -138,7 +128,6 @@ module.exports = {
         User.find(req.param("id"))
           .populate("roles")
           .populate("services")
-          .populate("providerAppointments")
           .populate("customerAppointments")
           .populate("schedules")
           .exec(function userFound(err, user) {
@@ -148,40 +137,5 @@ module.exports = {
             res.json(user);
           });
     },
-    fetchUserAppointments: function (req, res, next) {
-        sails.log('params:',req.params)
-        User.findOne(req.param("id"))
-          .populate("roles")
-          .populate("services")
-          .populate("providerAppointments")
-          .populate("customerAppointments")
-          .populate("schedules")
-          .exec(function userFound(err, user) {
-            if (err) {
-              return sails.log(err);
-            }
-            console.log(user);
-            //res.json(user.userAppointments);
-          });
-    },
-    // getRole: function(req,res,next) {
-    //     User.findOne(req.param('id'))
-    //         .populate('roles')
-    //         .exec(function userFound(err,user){
-    //             if (err) {
-    //                 return sails.log(err);
-    //             }
-    //             res.json(user.roles)
-    //         })
-    // },
-    // getLoc: function (req, res) {
-    //     sails.log(req.params.id);
-    //     var id = req.params.id;
-    //     User.findOne({ id: id })
-    //         .exec(function foundAddress(err, user) {
-    //             if (err) { return res.json(err); }
-    //             sails.log(user);
-    //             res.json(user.address);
-    //         })
-    // },
+ 
 }
