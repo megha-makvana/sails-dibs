@@ -31,7 +31,7 @@ module.exports = {
       model: "user",
     },
     serviceAppointment: {
-      model: "service"
+      model: "service",
     }
   }
 };

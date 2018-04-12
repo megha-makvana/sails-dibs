@@ -43,7 +43,10 @@ module.exports.routes = {
 
   "/appt/create": "AppointmentController.create",
   "/appt/getAllAppointments": "AppointmentController.getAllAppointments",
+  "/appt/cancelAppointment/:id":"AppointmentController.cancelAppointment",
 
+  "/service/fetchService/:id": "ServiceController.fetchService",
+  "/service/getAllServices": "ServiceController.getAllServices"
 
  // "/user/getAppointment/:id": "UserController.fetchUserAppointments", //user's appointment
 
